@@ -28,7 +28,6 @@ int FrequencyTable::Increment(uint32_t symbol) {
 CodeTree FrequencyTable::BuildCodeTree() const {
   std::priority_queue<NodeWithFreq> pqueue;
 
-
   for(size_t i = 0; i < m_freq_table.size(); i++){
     const auto& freq = m_freq_table.at(i);
     if(freq > 0){
@@ -36,7 +35,7 @@ CodeTree FrequencyTable::BuildCodeTree() const {
     }
   }
 
-  // atleast 3 characters
+  // at least 3 different characters
   if(pqueue.size() <= 2){
     for(size_t i = 0; i < m_freq_table.size(); i++){
       const auto& freq = m_freq_table.at(i);

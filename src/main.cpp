@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
   std::ofstream out(output_file_name, std::ios::binary);
   BitOutPutStream bout(out);
 
-  // 文件头
+  // write file head
   for (uint32_t i = 0; i < canonicalcode.GetSymbolLimit(); i++) {
     uint32_t val = canonicalcode.GetCodeLength(i);
     for (int j = 7; j >= 0; j--) {
@@ -59,11 +59,9 @@ int main(int argc, char **argv) {
   input_file.seekg(0);
 
   while (true) {
-
     int symbol = input_file.get();
     if (symbol == std::char_traits<char>::eof())
       break;
-
     encoder.write(static_cast<uint32_t>(symbol));
   }
   encoder.write(256);
