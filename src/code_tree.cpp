@@ -20,7 +20,7 @@ static void print_vector(uint32_t symbol, const T& vector){
 
 Node::~Node() {}
 
-Leaf::Leaf(std::uint64_t symbol) : m_symbol(symbol) {}
+Leaf::Leaf(std::uint32_t symbol) : m_symbol(symbol) {}
 
 InternalNode::InternalNode(std::unique_ptr<Node> &&left, std::unique_ptr<Node> &&right)
     : m_left_node(std::move(left)), m_right_node(std::move(right)) {}
