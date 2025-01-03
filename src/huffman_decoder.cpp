@@ -13,7 +13,6 @@ void HuffmanDecoder::SetCodeTree(const CodeTree* code_tree){
   m_code_tree = code_tree;
 }
 
-
 int HuffmanDecoder::Read(){
   const InternalNode* current_node = &(m_code_tree->m_root);
   while(true){

@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
     if (b == std::char_traits<char>::eof()) {
       break;
     }
-    assert(0 <= b || b <= 256);
+    assert(0 <= b && b <= 256);
     freqs.Increment(static_cast<uint32_t>(b));
   }
   // eof ++
