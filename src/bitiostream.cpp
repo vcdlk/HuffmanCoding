@@ -31,6 +31,10 @@ BitInputStream::BitInputStream(std::istream &input)
 
 
 int BitInputStream::read(){
+  if(m_current_bytes == std::char_traits<char>::eof()){
+    return -1;
+  }
+
   if(m_numbits_remaining == 0){
     m_current_bytes = m_input.get();
     if(m_current_bytes == std::char_traits<char>::eof()){
