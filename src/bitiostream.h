@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <istream>
 #include <ostream>
 class BitOutPutStream final{
   public:
@@ -17,3 +18,15 @@ class BitOutPutStream final{
 };
 
 
+class BitInputStream final{
+  public:
+  explicit BitInputStream(std::istream& input);
+
+  int read();
+
+  private:
+  std::istream& m_input;
+
+  uint32_t m_current_bytes;
+  uint32_t m_numbits_remaining;
+};

@@ -9,22 +9,19 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_BUILD_TYPE Debug)
 
-add_executable(main 
-        src/main.cpp 
-        src/frequency_table.cpp
-        src/frequency_table.h
-        src/code_tree.cpp
-        src/code_tree.h 
-        src/bitiostream.cpp
-        src/bitiostream.h
-        src/canonicalcode.cpp
-        src/canonicalcode.h
-        src/huffman_coder.cpp
-        src/huffman_coder.h
+add_executable(huffmanencode 
+        src/huffmanencode.cpp 
 )
 
+add_executable(huffmandecode
+        src/huffmandecode.cpp 
+)
+
+target_link_libraries(huffmanencode  comm_logic)
+target_link_libraries(huffmandecode  comm_logic)
+
+
 add_library(comm_logic
-            src/main.cpp 
             src/frequency_table.cpp
             src/frequency_table.h
             src/code_tree.cpp
@@ -35,6 +32,8 @@ add_library(comm_logic
             src/canonicalcode.h
             src/huffman_coder.cpp
             src/huffman_coder.h
+            src/huffman_decoder.cpp
+            src/huffman_decoder.h
 )
 
 add_subdirectory(third_party/googletest)

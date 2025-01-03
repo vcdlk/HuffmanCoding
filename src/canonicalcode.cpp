@@ -10,13 +10,8 @@
 #include <utility>
 #include <vector>
 
-
-
 CanonicalCode::CanonicalCode(const std::vector<uint32_t> &code_lens) {
   m_code_lengths = code_lens;
-
-  std::sort(m_code_lengths.begin(), m_code_lengths.end(),
-            std::greater<uint32_t>());
 }
 
 CanonicalCode::CanonicalCode(const CodeTree &tree, std::uint32_t symbol_limit) {
@@ -57,7 +52,7 @@ CodeTree CanonicalCode::ToCodeTree() const {
     }
     }
 
-
+    std::cout << "ToCodeTree nodes.size:" << nodes.size() << std::endl;
     for (size_t j = 0; j < nodes.size(); j = j + 2) {
       temp_nodes.push_back(std::unique_ptr<InternalNode>(new InternalNode(
           std::move(nodes.at(j)), std::move(nodes.at(j + 1)))));
