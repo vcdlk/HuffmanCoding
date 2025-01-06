@@ -47,7 +47,6 @@ int main(int argc, char **argv) {
   // write file head
   for (uint32_t i = 0; i < canonicalcode.GetSymbolLimit(); i++) {
     uint32_t val = canonicalcode.GetCodeLength(i);
-    std::cout << "GetCodeLength: "<< i << ":"<< val << std::endl;
     for (int j = 7; j >= 0; j--) {
       bout.write((val >> j) & 1);
     }
