@@ -14,7 +14,7 @@ TEST(FrequencyTableTest, FrequencyTable){
 
   EXPECT_EQ(table.Get(12), 2);
   EXPECT_EQ(table.Get(13), 1);
-  EXPECT_EQ(table.Get(1), 1);
+  EXPECT_EQ(table.Get(1), 0);
 }
 
 int main(int argc, char **argv) {

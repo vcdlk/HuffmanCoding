@@ -42,10 +42,10 @@ enable_testing()
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-add_executable(test_example
-               test/test.cpp
+add_executable(huffman_test
+               test/frequency_table_test.cpp
                src/frequency_table.h)
 
-target_link_libraries(test_example gtest gtest_main comm_logic)
+target_link_libraries(huffman_test gtest gtest_main comm_logic)
 
-add_test(NAME test_example COMMAND test_example)
+add_test(NAME huffman_test COMMAND huffman_test)
