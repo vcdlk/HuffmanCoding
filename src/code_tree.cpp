@@ -5,18 +5,7 @@
 #include <stdexcept>
 #include <utility>
 #include <vector>
-#include <iostream>
 
-
-
-template <typename  T>
-static void print_vector(uint32_t symbol, const T& vector){
-   std::cout << "print_vector" << symbol << ":";
-  for(const auto& a : vector){
-    std::cout << static_cast<uint32_t>(a) << ",";
-  }
-  std::cout << "\n";
-}
 
 Node::~Node() {}
 
@@ -48,7 +37,6 @@ void CodeTree::BuildCodeList(const Node* node, std::vector<char>& prefix){
     prefix.pop_back();
   }else if(dynamic_cast<const Leaf*>(node) != nullptr){
     const Leaf* leaf_node = dynamic_cast<const Leaf*>(node);
-    print_vector(leaf_node->m_symbol, prefix);
     code_list[leaf_node->m_symbol] = prefix;
   }
   return;

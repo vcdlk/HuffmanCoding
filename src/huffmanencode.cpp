@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
     assert(0 <= b || b <= 256);
     freqs.Increment(static_cast<uint32_t>(b));
   }
-  // eof ++
+  // need write eof to mark file is end
   freqs.Increment(256);
   CodeTree code_tree = freqs.BuildCodeTree();
 
@@ -47,7 +47,6 @@ int main(int argc, char **argv) {
   // write file head
   for (uint32_t i = 0; i < canonicalcode.GetSymbolLimit(); i++) {
     uint32_t val = canonicalcode.GetCodeLength(i);
-    std::cout << "GetCodeLength: "<< i << ":"<< val << std::endl;
     for (int j = 7; j >= 0; j--) {
       bout.write((val >> j) & 1);
     }
@@ -67,6 +66,6 @@ int main(int argc, char **argv) {
   }
   encoder.write(256);
   bout.finish();
-
+  
   return 0;
 }

@@ -39,7 +39,6 @@ CodeTree CanonicalCode::ToCodeTree() const {
   std::vector<std::unique_ptr<Node>> nodes;
   uint32_t max_deep =
       *std::max_element(m_code_lengths.cbegin(), m_code_lengths.cend());
-  std::cout << "ToCodeTree 1:" << max_deep << std::endl;
   for (uint32_t i = max_deep; ; i--) {
     std::vector<std::unique_ptr<Node>> temp_nodes;
     if(i > 0){
@@ -52,7 +51,6 @@ CodeTree CanonicalCode::ToCodeTree() const {
     }
     }
 
-    std::cout << "ToCodeTree nodes.size:" << nodes.size() << std::endl;
     for (size_t j = 0; j < nodes.size(); j = j + 2) {
       temp_nodes.push_back(std::unique_ptr<InternalNode>(new InternalNode(
           std::move(nodes.at(j)), std::move(nodes.at(j + 1)))));
@@ -63,9 +61,7 @@ CodeTree CanonicalCode::ToCodeTree() const {
       break;
     }
   }
-  std::cout << "ToCodeTree 2:" << max_deep << std::endl;
 
-  std::cout << "ToCodeTree nodes size:" << nodes.size() << std::endl;
 
 
   Node *temp = nodes.front().release();

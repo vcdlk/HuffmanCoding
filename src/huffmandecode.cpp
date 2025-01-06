@@ -43,6 +43,9 @@ int main(int argc, char** argv){
 
   while(true){
     int b = huffman_decoder.Read();
+    if(b == 256){
+      break;
+    }
     if(b == -1){
       out.close();
       break;
