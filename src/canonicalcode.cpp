@@ -2,10 +2,9 @@
 #include "code_tree.h"
 
 #include <algorithm>
+#include <cassert>
 #include <cstddef>
 #include <cstdint>
-#include <functional>
-#include <iostream>
 #include <memory>
 #include <utility>
 #include <vector>
@@ -15,9 +14,7 @@ CanonicalCode::CanonicalCode(const std::vector<uint32_t> &code_lens) {
 }
 
 CanonicalCode::CanonicalCode(const CodeTree &tree, std::uint32_t symbol_limit) {
-  if (symbol_limit < 2) {
-    throw std::invalid_argument("At least 2 symbols needed");
-  }
+  assert(symbol_limit >= 2);
 
   m_code_lengths = std::vector<uint32_t>(symbol_limit, 0);
   BuildCodeLengths(&tree.m_root, 0);
@@ -39,7 +36,6 @@ CodeTree CanonicalCode::ToCodeTree() const {
   std::vector<std::unique_ptr<Node>> nodes;
   uint32_t max_deep =
       *std::max_element(m_code_lengths.cbegin(), m_code_lengths.cend());
-  std::cout << "ToCodeTree 1:" << max_deep << std::endl;
   for (uint32_t i = max_deep; ; i--) {
     std::vector<std::unique_ptr<Node>> temp_nodes;
     if(i > 0){
@@ -52,7 +48,6 @@ CodeTree CanonicalCode::ToCodeTree() const {
     }
     }
 
-    std::cout << "ToCodeTree nodes.size:" << nodes.size() << std::endl;
     for (size_t j = 0; j < nodes.size(); j = j + 2) {
       temp_nodes.push_back(std::unique_ptr<InternalNode>(new InternalNode(
           std::move(nodes.at(j)), std::move(nodes.at(j + 1)))));
@@ -63,10 +58,6 @@ CodeTree CanonicalCode::ToCodeTree() const {
       break;
     }
   }
-  std::cout << "ToCodeTree 2:" << max_deep << std::endl;
-
-  std::cout << "ToCodeTree nodes size:" << nodes.size() << std::endl;
-
 
   Node *temp = nodes.front().release();
   InternalNode *root = dynamic_cast<InternalNode *>(temp);

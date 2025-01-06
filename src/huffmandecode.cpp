@@ -43,7 +43,6 @@ int main(int argc, char** argv){
 
   while(true){
     int b = huffman_decoder.Read();
-    // std::cout << b << std::endl;
     if(b == 256){
       break;
     }

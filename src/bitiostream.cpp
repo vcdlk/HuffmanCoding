@@ -2,6 +2,8 @@
 #include <istream>
 #include <ostream>
 #include <string>
+#include <cassert>
+
 
 BitOutPutStream::BitOutPutStream(std::ostream &out_put) : m_out_put(out_put) {
   m_current_bytes = 0;
@@ -9,9 +11,7 @@ BitOutPutStream::BitOutPutStream(std::ostream &out_put) : m_out_put(out_put) {
 }
 
 void BitOutPutStream::write(int b) {
-  if (b != 0 && b != 1) {
-    throw std::domain_error("Argument must be 0 or 1");
-  }
+  assert(b == 0 || b == 1);
   m_current_bytes = (m_current_bytes << 1) | b;
   m_numbits_filled++;
   if (m_numbits_filled == 8) {
